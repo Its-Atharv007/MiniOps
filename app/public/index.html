@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MiniOps Demo App – DevOps Automation & Monitoring Platform</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+            <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+            <line x1="6" y1="6" x2="6.01" y2="6"></line>
+            <line x1="6" y1="18" x2="6.01" y2="18"></line>
+          </svg>
+        </div>
+        <div>
+          <h1 class="brand-title">MiniOps Demo App</h1>
+          <p class="brand-subtitle">DevOps Automation & Monitoring Platform</p>
+        </div>
+      </div>
+      <div class="status-container">
+        <span id="app-status-badge" class="badge badge-loading">
+          <span class="badge-dot"></span> Checking Status...
+        </span>
+      </div>
+    </header>
+
+    <!-- Overview Hero -->
+    <section class="card hero-card">
+      <div class="hero-content">
+        <h2>Demonstration & Telemetry Dashboard</h2>
+        <p>A lightweight, container-ready Node.js web application built for DevOps demonstration. Exposes real-time system metrics, dynamic health probes, and structured API endpoints.</p>
+        <div class="pills-row">
+          <span class="pill pill-tech">Node.js 22 + Express</span>
+          <span class="pill pill-metrics">Prometheus Metrics Active</span>
+          <span class="pill pill-docker">Docker & CI/CD Ready</span>
+          <span class="pill pill-lightweight">Zero Heavy Dependencies</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Info Cards -->
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Application Telemetry</h3>
+        <p class="card-desc">Runtime parameters monitored dynamically.</p>
+        <ul class="meta-list">
+          <li><strong>Application:</strong> <span>MiniOps Demo App</span></li>
+          <li><strong>Backend Framework:</strong> <span>Express.js (Node.js 22 LTS)</span></li>
+          <li><strong>Uptime:</strong> <span id="telemetry-uptime">Connecting...</span></li>
+          <li><strong>Listen Host:</strong> <code>0.0.0.0</code> (All Interfaces)</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Observability Stack</h3>
+        <p class="card-desc">Prometheus scraping and availability monitoring.</p>
+        <ul class="meta-list">
+          <li><strong>Metrics Library:</strong> <code>prom-client</code></li>
+          <li><strong>Scrape Target:</strong> <a href="/metrics" class="link" id="link-metrics-meta">/metrics</a></li>
+          <li><strong>Cardinality Control:</strong> <span>Bounded Route Labels</span></li>
+          <li><strong>Noise Exclusion:</strong> <span>/metrics requests filtered out</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Available Endpoints Table -->
+    <section class="card">
+      <h3>Available API Endpoints</h3>
+      <p class="card-desc">The following routes are exposed by this service and ready for Blackbox and Prometheus probes:</p>
+      <div class="table-container">
+        <table class="endpoint-table">
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Endpoint</th>
+              <th>Description</th>
+              <th>Response Type</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="http-badge get">GET</span></td>
+              <td><a href="/" class="endpoint-link" id="link-home">/</a></td>
+              <td>MiniOps Homepage (Web UI)</td>
+              <td><code>text/html</code></td>
+              <td><a href="/" class="btn btn-sm btn-outline">Visit</a></td>
+            </tr>
+            <tr>
+              <td><span class="http-badge get">GET</span></td>
+              <td><a href="/health" class="endpoint-link" target="_blank" id="link-health">/health</a></td>
+              <td>Health probe reporting live status and dynamic uptime</td>
+              <td><code>application/json</code></td>
+              <td><a href="/health" target="_blank" class="btn btn-sm btn-outline">Open</a></td>
+            </tr>
+            <tr>
+              <td><span class="http-badge get">GET</span></td>
+              <td><a href="/api/users" class="endpoint-link" target="_blank" id="link-users">/api/users</a></td>
+              <td>Sample developer data in-memory</td>
+              <td><code>application/json</code></td>
+              <td><a href="/api/users" target="_blank" class="btn btn-sm btn-outline">Open</a></td>
+            </tr>
+            <tr>
+              <td><span class="http-badge get">GET</span></td>
+              <td><a href="/metrics" class="endpoint-link" target="_blank" id="link-metrics">/metrics</a></td>
+              <td>Prometheus text format metrics scrape target</td>
+              <td><code>text/plain</code></td>
+              <td><a href="/metrics" target="_blank" class="btn btn-sm btn-outline">Open</a></td>
+            </tr>
+            <tr>
+              <td><span class="http-badge get">GET</span></td>
+              <td><span class="endpoint-link">/api/nonexistent</span></td>
+              <td>Unmatched API route error test</td>
+              <td><code>application/json</code></td>
+              <td><button id="btn-quick-error" class="btn btn-sm btn-outline-danger">Test 404</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Interactive API Playground -->
+    <section class="card">
+      <div class="playground-header">
+        <div>
+          <h3>Interactive API Playground</h3>
+          <p class="card-desc">Click any button below to execute an immediate API request and observe the live response and latency.</p>
+        </div>
+      </div>
+
+      <div class="btn-group">
+        <button id="btn-test-health" class="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          Test Health API
+        </button>
+        <button id="btn-fetch-users" class="btn btn-secondary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Fetch Users
+        </button>
+        <button id="btn-view-metrics" class="btn btn-outline">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          Preview Metrics
+        </button>
+        <button id="btn-test-404" class="btn btn-outline-danger">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          Test 404 Route
+        </button>
+      </div>
+
+      <!-- Response Viewer -->
+      <div class="console-box">
+        <div class="console-header">
+          <div class="console-title">
+            <span class="console-dot red"></span>
+            <span class="console-dot yellow"></span>
+            <span class="console-dot green"></span>
+            <span id="response-target" class="console-url">Ready for request</span>
+          </div>
+          <div id="response-meta" class="console-meta">Awaiting trigger</div>
+        </div>
+        <pre class="console-body"><code id="response-output">// Click a button above to test an endpoint...
+// Requests are executed strictly on-demand (no automated polling).</code></pre>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>MiniOps – DevOps Automation & Monitoring Platform</p>
+      <p class="footer-sub">Designed for College Internship Final Review | Fedora Linux Workstation</p>
+    </footer>
+  </div>
+
+  <script src="/script.js"></script>
+</body>
+</html>

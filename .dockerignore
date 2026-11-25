@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+
+# Environment and local secrets
+.env
+.env.local
+
+# Version control & docs
+.git/
+.gitignore
+
+# Tests & coverage
+tests/
+coverage/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
